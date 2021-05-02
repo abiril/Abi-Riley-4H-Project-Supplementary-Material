@@ -64,7 +64,7 @@ fe <- fitdistr(SIR_Cases$Total, "exponential")
 fe
 
 UK.Regions <- readOGR("Region_(December_2015)_Boundaries.shp")
-timecases <- merge(UK.Regions, SIR_Cases2, by.x="rgn17nm", by.y="Region")
+timecases <- merge(UK.Regions, SIR_Cases2, by.x="rgn15nm", by.y="Region")
 
 time <- c(as.character(seq(from = 43891, to = 43921, by = 1)))
 
@@ -75,7 +75,7 @@ casetimes <- tm_shape(timecases) +
                 "43903", "43904", "43905" ,"43906" ,"43907", "43908",
                 "43909", "43910", "43911", "43912", "43913", "43914",
                 "43915", "43916", "43917", "43918" ,"43919", "43920",
-                "43921"), palette="BuPu", title= "UK Cases by Region", style = "log10_pretty")+
+                "43921"), palette="BuPu", title= "UK Cases by Region",style = "fixed", breaks = c(0,3,10,32,100,316,1000))+
   tm_facets(ncol = 8, nrow = 5, sync= TRUE, free.scales= FALSE)
 casetimes
 tmap_animation(casetimes, delay=40)
@@ -203,4 +203,4 @@ tmap_animation(post.casetimes2, delay=40)
 SIR_R <- read_excel("SIR Dataset.xlsx",sheet = "PosteriorRT")
 ts_plot(SIR_R, title = "UK Removed by Region March 2020", Ytitle = "Number of Cases")
 SIR_S <- read_excel("SIR Dataset.xlsx",sheet = "PosteriorST")
-ts_plot(SIR_R, title = "UK Susceptible by Region March 2020", Ytitle = "Number of Cases")
+ts_plot(SIR_S, title = "UK Susceptible by Region March 2020", Ytitle = "Number of Cases")
